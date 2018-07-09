@@ -53,7 +53,7 @@ class Card extends Component{
        
         const inputData = [
                 {title: 'Color', state: this.state.color, name: 'color' },
-                {title: 'Plural Noun', state: this.state.noun, name: 'pnoun' },
+                {title: 'Plural Noun', state: this.state.pnoun, name: 'pnoun' },
                 {title: 'Adjective', state: this.state.adjectiveOne, name:'adjectiveOne' },
                 {title: 'Celebrity', state: this.state.celebOne, name: 'celebOne' },
 
@@ -76,12 +76,14 @@ class Card extends Component{
 
         return(
             <form onSubmit={this.handleFormSubmit} className="card">
-                <div className="card_inputs">
+                <div className="card__inputs">
                 {
-                  inputData.map(data => Input((data),this.handleInputChange))
+                  inputData.map((data, index) => {
+                      return Input( (data),this.handleInputChange, index)
+                    })
                 }
                 </div>
-                <button type="submit">{!this.state.contentVisible ? "Generate MadLibs" : "Clear Form" }</button>
+                <button className={`card__${!this.state.contentVisible ? 'generate': 'clear'}`} type="submit">{!this.state.contentVisible ? "Generate MadLibs" : "Clear Form" }</button>
                 {
                     this.state.contentVisible ? <Content data={this.state}/>:''
                 }
